@@ -33,11 +33,20 @@ Software requirements (for the Pi):
 ## Guide
 ### For the Pi
 - Replace all my IP addresses in configs etc. with your own
-- Change Pi password, apt update, apt upgrade etc.
+- Change the Pi password, apt update, apt upgrade etc.
 - Install all the requirements
 - Set the DHCP server up, configure it /etc/dhcpd/dhcp.conf
+```
+systemctl enable isc-dhcp-server
+systemctl start isc-dhcp-server
+````
 - Connect via ethernet to the PC and check if you're in the network, there should be only 2 computers, your own and the Pi
 - Configure OpenVPN and TOR
+- Disable TOR / OpenVPN daemon running at startup
+```
+systemctl disable tor
+systemctl disable openvpn
+````
 - Load iptables rules to prevent leaks (copy the rules) 
 - Disable IPv6 in the kernel (/etc/sysctl.conf and sudo sysctl -p after changing)
 ```
@@ -61,6 +70,9 @@ net.ipv4.ip_forward = 1
 - Go to check.torproject.org and fire up nyx (optional) on the Pi, to see if it works. Your route should look like this:
 
 ```PC -> Pi -> VPN -> Tor -> Destination server```
+
+There's no way to SSH to the Pi on the Ethernet network/WiFi network as everything is transparently routed to port 9040 on the Pi.
+You can even test it with nmap, it looks like every port is open and tcpwrapped.
 
 
 ## WARNING! YOU NEED TO REPLACE MY IP ADDRESSES WITH YOUR OWN !
