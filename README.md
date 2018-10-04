@@ -1,6 +1,6 @@
 # RPI-Anonymous-Box
-Reisources necessary to set up a physically-isolated environment (using Raspberry PI 3B) for anonymous internet usage.
-The setup consists of two computers, one of them is a Raspberry pi 3B connected to the internet via WiFi, and a second computer which will be connected directly to the Pi by Ethernet. The second computer can't have any other network connectivity except for this Ethernet port.
+Reisources necessary to set up a physically-isolated environment (using Raspberry Pi 3B) for anonymous internet usage.
+The setup consists of two computers, one of them is a Raspberry Pi 3B connected to the Internet via WiFi, and a second computer which will be connected directly to the Pi by Ethernet. The second computer can't have any other network connectivity except for this Ethernet port.
 
 The idea is to route everything from the Workstation to the Pi, which in turn will route everything through VPN, and then through Tor.
 
