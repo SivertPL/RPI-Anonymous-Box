@@ -1,5 +1,5 @@
 # RPI-Anonymous-Box
-Reisources necessary to set up a physically-isolated environment (using Raspberry Pi 3B) for anonymous internet usage.
+Resources necessary to set up a physically-isolated environment (using Raspberry Pi 3B) for anonymous internet usage.
 The setup consists of two computers, one of them is a Raspberry Pi 3B connected to the Internet via WiFi, and a second computer which will be connected directly to the Pi by Ethernet. The second computer can't have any other network connectivity except for this Ethernet port.
 
 The idea is to route everything from the Workstation to the Pi, which in turn will route everything through VPN, and then through Tor.
@@ -17,10 +17,11 @@ Software requirements (for the Pi):
 - tor
 - openvpn
 - iptables-persistent
+- festival (optional) for voice information, it's pretty cool! If you don't want it, edit the script anon.sh.
 - nyx (optional) for monitoring TOR usage
 
 ## Contents of the repository
-- dhcpdc.conf - configuration for the dhcp server, which provides a mini-network on the Ethernet
+- dhcpd.conf - configuration for the dhcp server, which provides a mini-network on the Ethernet
 - anon.sh - this script will make everything easier. After configuring iptables and dhcpd you just need to type "anon start" to initialize the Network
 - rules.v4 - these are iptables rules necessary to prevent any leaks
 - torrc - TOR daemon settings
@@ -29,6 +30,9 @@ Software requirements (for the Pi):
 - My configuration is in list.txt. 
 - Create a file auth.txt which contains 2 lines: your email address and passwordfor the VPN in /etc/openvpn/
 - /etc/openvpn/ovpn_udp is the file where all your VPN configs should be located in
+
+## What the script does
+The script chooses a random VPN to connect to, connects to it, and starts the TOR daemon
 
 ## Guide
 ### For the Pi
@@ -41,7 +45,7 @@ systemctl enable isc-dhcp-server
 systemctl start isc-dhcp-server
 ````
 - Connect via ethernet to the PC and check if you're in the network, there should be only 2 computers, your own and the Pi
-- Configure OpenVPN and TOR
+- Configure OpenVPN and TOR (/etc/tor/torrc, /etc/openvpn)
 - Disable TOR / OpenVPN daemon running at startup
 ```
 systemctl disable tor
