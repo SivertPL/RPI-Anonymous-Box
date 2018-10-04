@@ -14,9 +14,10 @@ Hardware requirements:
 
 Software requirements (for the Pi):
 - isc-dhcp-server 
-- nyx (optional) for monitoring TOR usage
 - tor
 - openvpn
+- iptables-persistent
+- nyx (optional) for monitoring TOR usage
 
 ## Contents of the repository
 - dhcpdc.conf - configuration for the dhcp server, which provides a mini-network on the Ethernet
@@ -29,13 +30,36 @@ Software requirements (for the Pi):
 - Create a file auth.txt which contains 2 lines: your email address and passwordfor the VPN in /etc/openvpn/
 - /etc/openvpn/ovpn_udp is the file where all your VPN configs should be located in
 
+## Guide
+### For the Pi
+- Replace all my IP addresses in configs etc with your own
+- Change Pi password, apt update, apt upgrade etc.
+- Install all the requirements
+- Set the DHCP server up, configure it /etc/dhcpd/dhcp.conf
+- Connect via ethernet to the PC and check if you're in the network, there should be only 2 computers, your own and the Pi
+- Configure OpenVPN and tor
+- Load iptables rules to prevent leaks (copy the rules) 
+- Disable IPv6 in the kernel
+- Enable ipv4 forwarding in the kernel
+- Reboot and check if everything's ok (you SHOULDN'T be able to connect to the internet except through the VPN)
+- Move anon.sh to /usr/bin/anon for convenience and chmod +x
+- sudo anon start
+### For the PC
+- Remove WiFi/Bluetooth/Camera/Microphone or disable in BIOS
+- Install some kind of linux for example lubuntu with disk encryption
+- Connect the ethernet cable to the PC
+- **IMPORTANT** Install htpdate because TOR does not route UDP (NTP).
+- Configure the TOR Browser not to use TOR. **TOR OVER TOR IS NOT RECOMMENDED**
+- Go to check.torproject.org and fire up nyx (optional) on the Pi, to see if it works. Your route should look like this:
+
+PC -> Pi -> VPN -> Tor -> Destination server
+
 
 ## WARNING! YOU NEED TO REPLACE MY IP ADDRESSES WITH YOUR OWN !
 
 
-
 ## Gallery
 
-
+![anon script](https://i.imgur.com/myR3AHC.jpg)
 
 
