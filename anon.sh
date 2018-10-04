@@ -2,6 +2,7 @@
 
 # Anonymization framework by DKF Sivert
 # Firewall configured with iptables
+# Check README.md if you don't know what you're doing
 
 export BLUE='\033[1;94m'
 export GREEN='\033[1;92m'

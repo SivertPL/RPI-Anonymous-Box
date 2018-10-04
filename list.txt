@@ -1,0 +1,7 @@
+total 21160
+-rw-r--r-- 1 root root       37 Oct  3 19:12 auth.txt
+drwxr-xr-x 2 root root     4096 Jul 18  2017 client
+drwxr-xr-x 2 root root   262144 Oct  3 19:12 ovpn_udp
+-rw-r--r-- 1 root root 21384563 Oct  2 08:01 ovpn.zip
+drwxr-xr-x 2 root root     4096 Jul 18  2017 server
+-rwxr-xr-x 1 root root     1301 Jul 18  2017 update-resolv-conf

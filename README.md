@@ -22,8 +22,17 @@ Software requirements (for the Pi):
 - dhcpdc.conf - configuration for the dhcp server, which provides a mini-network on the Ethernet
 - anon.sh - this script will make everything easier. After configuring iptables and dhcpd you just need to type "anon start" to initialize the Network
 - rules.v4 - these are iptables rules necessary to prevent any leaks
+- torrc - TOR daemon settings
 
-## WARNING! YOU NEED TO REPLACE MY SETTINGS WITH YOUR OWN ESPECIALLY IN IPTABLES AND RELATED 
+## OpenVPN setup
+- My configuration is in list.txt. 
+- Create a file auth.txt which contains 2 lines: your email address and passwordfor the VPN in /etc/openvpn/
+- /etc/openvpn/ovpn_udp is the file where all your VPN configs should be located in
+
+
+## WARNING! YOU NEED TO REPLACE MY IP ADDRESSES WITH YOUR OWN !
+
+
 
 ## Gallery
 
