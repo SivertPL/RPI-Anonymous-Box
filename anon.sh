@@ -18,6 +18,8 @@ IFACE_IP="192.168.40.1"
 IFACE_NM="255.255.255.0"
 IFACE_BC="192.168.40.255"
 
+DNS_MAIN="103.86.96.100" # NordVPN DNS
+DNS_BACKUP="103.86.99.10"
 
 function random_vpn {
 	choice=$(ls $VPN_PATH | shuf -n 1)
@@ -37,6 +39,15 @@ function start_daemons {
 	sudo -u debian-tor tor -f /etc/tor/torrc --RunAsDaemon 1
 }
 
+function change_dns {
+	echo "nameserver $DNS_MAIN" > /etc/resolv.conf
+	echo "nameserver $DNS_BACKUP" >> /etc/resolv.conf
+}
+
+function revert_dns {
+	rm /etc/resolv.conf && touch /etc/resolv.conf
+}
+
 function check_root {
 	if [ $(id -u) -ne 0 ]; then
 		echo -e "${RED}This script must be run as root${RESET}" >&2
@@ -48,6 +59,7 @@ function stop {
 	echo "Stopping the anonymization framework. Please disconnect all your devices" | festival --tts
 	pkill openvpn
 	pkill tor
+	revert_dns
 	echo -e "${RED}Disconnected. All outgoing/incoming connections are blocked.${RESET}"
 }
 
@@ -59,6 +71,7 @@ function start {
 	init_fw
 	echo -e "${BLUE}Starting OpenVPN/TOR daemons ..."
 	start_daemons
+	change_dns
 	echo "The anonymization framework has been initialized successfully. You are now completely anonymous." | festival --tts
 	echo -e "${GREEN}Done!$RESET"
 }
